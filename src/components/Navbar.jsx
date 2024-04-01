@@ -2,11 +2,14 @@ import { BsCart3, BsMoonFill, BsSunFill } from 'react-icons/bs';
 import { FaBarsStaggered } from 'react-icons/fa6';
 import { NavLink } from 'react-router-dom';
 import NavLinks from './NavLinks';
+import Toggle from './Toggle';
 
 const Navbar = () => {
   return (
     <nav className='bg-base-200'>
       <div className='navbar align-element '>
+
+        {/* HOME AND DROPDOWN */}
         <div className='navbar-start'>
           {/* Title */}
           <NavLink
@@ -28,13 +31,18 @@ const Navbar = () => {
             </ul>
           </div>
         </div>
+
+        {/* LINKS */}
         <div className='navbar-center hidden lg:flex'>
           <ul className='menu menu-horizontal '>
             <NavLinks/>
           </ul>
         </div>
+        
+        {/* CART AND THEME */}
         <div className='navbar-end'>
           {/* THEME ICONS */}
+          <Toggle/>
           {/* CART LINK*/}
           <NavLink to='cart' className='btn btn-ghost btn-circle btn-md ml-4'>
             <div className='indicator'>
