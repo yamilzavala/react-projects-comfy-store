@@ -1,10 +1,16 @@
 import React from 'react';
+import { PaginationContainer, Filters, ProductsContainer } from '../components';
+import { useLoaderData } from 'react-router-dom';
 
 const Products = () => {
+    const {products, meta} = useLoaderData();
+    
     return (
-        <div>
-           Products 
-        </div>
+        <>  
+            <Filters/>
+            <ProductsContainer/>
+            <PaginationContainer/>
+        </>
     );
 };
 

@@ -11,3 +11,7 @@ export {default as ErrorElement} from './ErrorElement';
 export {default as FeaturedProducts} from './FeaturedProducts';
 export {default as SectionTitle} from './SectionTitle';
 export {default as ProductsGrid} from './ProductsGrid';
+export {default as ProductsList} from './ProductList';
+export {default as PaginationContainer} from './PaginationContainer';
+export {default as ProductsContainer} from './ProductsContainer';
+export {default as Filters} from './Filters';
