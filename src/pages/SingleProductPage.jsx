@@ -14,18 +14,19 @@ const SingleProductPage = () => {
     const dispatch = useDispatch();
 
     const cartProduct = {
-        cartId: product.id + productColor,
-        productId: product.id,
-        image, 
-        title, 
-        price,          
+        cartID: product.id + productColor,
+        productID: product.id,
+        image,
+        title,
+        price,
+        amount,
+        productColor,
         company,
-        productColor, 
-    }
+      };
 
     const addToCart = () => {
-        dispatch(addItem({product: cartProduct}))
-    }
+        dispatch(addItem({ product: cartProduct }));
+    };
 
     const handleAmount = (e) => {
         setAmount(e.target.value)
@@ -89,9 +90,9 @@ const SingleProductPage = () => {
 
                     {/* CART BUTTON */}
                     <div className='mt-10 '>
-                        <button className='btn btn-secondary btn-md' onClick={addToCart}>
-                            Add to bag
-                        </button>
+                    <button className='btn btn-secondary btn-md' onClick={addToCart}>
+                        Add to bag
+                    </button>
                     </div>
                 </div>
 
