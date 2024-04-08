@@ -1,26 +1,12 @@
-import React, {useState, useEffect} from 'react';
 import { BsMoonFill, BsSunFill } from 'react-icons/bs';
-
-const themes = {
-    winter: 'winter',
-    dracula: 'dracula',
-}
-
-const getThemeFromLocalStorage = () => {
-    return localStorage.getItem('theme')
-}
+import {useDispatch} from 'react-redux'
+import { toggleTheme } from '../store/features/user/userSlice';
 
 const Toggle = () => {
-    const [theme, setTheme] = useState(getThemeFromLocalStorage() || themes.winter);
-
-    useEffect(() => {
-        document.documentElement.setAttribute('data-theme', theme)
-        localStorage.setItem('theme', theme)
-    },[theme])
+    const dispatch = useDispatch()
 
     const handleTheme = () => {
-        const newTheme = theme === 'dracula' ? 'winter' : 'dracula';       
-        setTheme(newTheme);
+        dispatch(toggleTheme())
       };
 
     return (        

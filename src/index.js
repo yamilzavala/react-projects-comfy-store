@@ -12,6 +12,6 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(    
       <Provider store={store}>
             <App /> 
-            <ToastContainer position='top-center'/>
+            <ToastContainer position='bottom-center'/>
       </Provider>
 );

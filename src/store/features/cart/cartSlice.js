@@ -20,35 +20,38 @@ const cartSlice = createSlice({
     reducers: {
         addItem: (state, action) => {
             const { product } = action.payload;
+            console.log(product)
+            console.log(parseInt(product.amount))
 
             const item = state.cartItems.find((i) => i.cartID === product.cartID);
             if (item) {
-              item.amount += product.amount;
+              item.amount += parseInt(product.amount);
             } else {
               state.cartItems.push(product);
             }
-            state.numItemsInCart += product.amount;
-            state.cartTotal += product.price * product.amount;
+            state.numItemsInCart += parseInt(product.amount);
+            state.cartTotal += parseInt(product.price) * parseInt(product.amount);
             cartSlice.caseReducers.calculateTotals(state);
             toast.success('item added')
         },
         removeItem: (state, action) => {
-            const {cartID} = action.payload;
-            const item = state.cartItems.find(item => item.cartID === cartID);
-            state.cartItems.filter(item => item.cartID !== cartID)
-            state.numItemsInCart -= item.amount;
-            state.cartTotal -= item.price * item.amount;
+            const { cartID } = action.payload;
+            const product = state.cartItems.find((i) => i.cartID === cartID);
+            state.cartItems = state.cartItems.filter((i) => i.cartID !== cartID);
+      
+            state.numItemsInCart -= product.amount;
+            state.cartTotal -= product.price * product.amount;
             cartSlice.caseReducers.calculateTotals(state);
-            toast.success('item removed')
+            toast.error('Item removed from cart');
         },
         editItem: (state, action) => {
             const {cartID, amount} = action.payload;
             let item = state.cartItems.find(item => item.cartID === cartID);
-            state.numItemsInCart -= item.amount;
-            state.cartTotal -= item.price * item.amount;
-            item.amount = amount; 
-            state.numItemsInCart += item.amount;
-            state.cartTotal += item.price * item.amount;
+            state.numItemsInCart -= parseInt(item.amount);
+            state.cartTotal -= parseInt(item.price) * parseInt(item.amount);
+            item.amount = parseInt(amount); 
+            state.numItemsInCart += parseInt(item.amount);
+            state.cartTotal += parseInt(item.price) * parseInt(item.amount);
             cartSlice.caseReducers.calculateTotals(state);
             toast.success('item edited')       
         },
