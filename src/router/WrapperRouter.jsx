@@ -2,12 +2,18 @@ import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { About, Cart, Checkout, Error, HomeLayout, Landing, Login, Orders, Products, Register, SingleProductPage } from '../pages';
 import { ErrorElement } from '../components';
+import {store} from '../store/store'
+//loaders
 import { landingLoader } from './loaders/landingLoader';
 import { singleProductLoader } from './loaders/singleProductLoader';
 import { productsLoader } from './loaders/productsLoader';
+import { checkoutLoader } from './loaders/checkoutLoader';
+import { orderLoaders } from './loaders/ordersLoader';
+//actions
 import { actionRegister } from './actions/actionRegister';
 import { actionLogin } from './actions/actionLogin';
-import {store} from '../store/store'
+import { actionCheckout } from './actions/actionCheckout';
+
 
 const router = createBrowserRouter([
     {
@@ -44,17 +50,20 @@ const router = createBrowserRouter([
             {
               path: 'checkout',
               element: <Checkout />,
+              loader: checkoutLoader(store),              
+              action: actionCheckout(store)
             },
             {
               path: 'orders',
               element: <Orders />,
+              loader: orderLoaders(store)
             },
         ]
     },
     {
         path: '/login',
         element: <Login />,
-        errorElement: <Error />,
+        // errorElement: <Error />,
         action: actionLogin(store),
     },
     {

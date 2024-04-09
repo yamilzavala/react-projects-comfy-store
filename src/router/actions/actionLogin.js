@@ -1,21 +1,21 @@
 import { customFetch } from "../../utils";
 import {toast} from 'react-toastify'
 import {redirect} from 'react-router-dom'
+import { loginUser } from "../../store/features/user/userSlice";
 
 const url = '/auth/local';
 
 export const actionLogin = (store) => async ({request}) => {
-    console.log(store)
-    // const formData = await request.getFormData();
-    // const data = Object.fromEntries(formData)
-    return null;
-    // try {
-    //     const response = await customFetch.post(url, data);
-    //     toast.success('user logged');
-    //     return redirect('/')
-    // } catch (error) {
-    //     const errorMessage = error?.response?.data?.error?.message || 'please double check your credentials';
-    //     toast.error(errorMessage)
-    //     return null;
-    // }
+    const formData = await request.formData()    
+    const data = Object.fromEntries(formData);    
+    try {
+        const response = await customFetch.post(url, data);
+        store.dispatch(loginUser(response.data))
+        toast.success('user logged');
+        return redirect('/')
+    } catch (error) {
+        const errorMessage = error?.response?.data?.error?.message || 'please double check your credentials';
+        toast.error(errorMessage)
+        return null;
+    }
 } 
