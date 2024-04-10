@@ -14,7 +14,15 @@ export const actionLogin = (store) => async ({request}) => {
         toast.success('user logged');
         return redirect('/')
     } catch (error) {
-        const errorMessage = error?.response?.data?.error?.message || 'please double check your credentials';
+        const detailsError = error?.response?.data?.error?.details.errors;
+        let errorMessage = '';
+        if(detailsError.length) {
+            detailsError.forEach(item => {
+                errorMessage += item.message + '. ' 
+            })
+        } else {
+            errorMessage = error?.response?.data?.error?.message || 'please double check your credentials'
+        }
         toast.error(errorMessage)
         return null;
     }
