@@ -1,10 +1,12 @@
+import ReactQueryProvider from './reactQuery/ReactQueryProvider';
 import WrapperRouter from './router/WrapperRouter';
+
 
 const AppConfyStore = () => {
     return (
-        <WrapperRouter>
-          
-        </WrapperRouter>
+        <ReactQueryProvider>
+            <WrapperRouter/>
+        </ReactQueryProvider>
     );
 };
 

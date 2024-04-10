@@ -4,6 +4,7 @@ import FormInput from './FormInput';
 import FormSelect from './FormSelect';
 import FormRange from './FormRange';
 import FormCheckbox from './FormCheckbox';
+import { formatPrice } from '../utils';
 
 const Filters = () => {
     const {meta, params} = useLoaderData();

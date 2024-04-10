@@ -5,7 +5,7 @@ import { clearCart } from "../../store/features/cart/cartSlice";
 
 const url = 'orders';
 
-export const actionCheckout = (store) => async ({request}) => {
+export const actionCheckout = (store, queryClient) => async ({request}) => {
     const formData = await request.formData();
     const { name, address } = Object.fromEntries(formData);
     const user = store.getState().userState.user;
@@ -26,6 +26,9 @@ export const actionCheckout = (store) => async ({request}) => {
 
     try {
         const response = await customFetch.post(url, {data: info}, {headers: headerInfo});
+        //remove query
+        queryClient.removeQueries(['orders']);
+        //rest of the code
         store.dispatch(clearCart())
         toast.success('order placed successfully')
         return redirect('/orders')
@@ -34,6 +37,7 @@ export const actionCheckout = (store) => async ({request}) => {
         toast.error(errorMessage);
         console.warn(error)
         if(error.response.status === 401 || error.response.status === 403) return redirect('/login')
+        return null;
     }
 
 }

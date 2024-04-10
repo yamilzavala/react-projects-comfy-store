@@ -3,6 +3,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { About, Cart, Checkout, Error, HomeLayout, Landing, Login, Orders, Products, Register, SingleProductPage } from '../pages';
 import { ErrorElement } from '../components';
 import {store} from '../store/store'
+import { queryClient } from '../reactQuery/ReactQueryProvider';
 //loaders
 import { landingLoader } from './loaders/landingLoader';
 import { singleProductLoader } from './loaders/singleProductLoader';
@@ -24,39 +25,39 @@ const router = createBrowserRouter([
             {
                 index: true,
                 element: <Landing/>,
-                loader: landingLoader,
+                loader: landingLoader(queryClient),
                 errorElement: <ErrorElement/>,
             },
             {
                 path: 'products',
                 element: <Products/>,
                 errorElement: <ErrorElement/>,
-                loader: productsLoader,
+                loader: productsLoader(queryClient),
             },
             {
                 path: 'products/:id',
                 element: <SingleProductPage/>,
-                loader: singleProductLoader,
+                loader: singleProductLoader(queryClient),
                 errorElement: <ErrorElement/>,
             },
             {
                 path: 'cart',
                 element: <Cart />,
             },
-            { 
-                path: 'about', 
-                element: <About /> 
+            {
+                path: 'about',
+                element: <About />
             },
             {
               path: 'checkout',
               element: <Checkout />,
-              loader: checkoutLoader(store),              
-              action: actionCheckout(store)
+              loader: checkoutLoader(store),
+              action: actionCheckout(store, queryClient)
             },
             {
               path: 'orders',
               element: <Orders />,
-              loader: orderLoaders(store)
+              loader: orderLoaders(store, queryClient)
             },
         ]
     },
