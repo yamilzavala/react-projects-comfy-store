@@ -7,7 +7,7 @@ const themes = {
 }
 
 const getThemeFromLocalStorage = () => {
-    const theme = localStorage.getItem('theme');
+    const theme = localStorage.getItem('theme') || 'winter';
     document.documentElement.setAttribute('data-theme', theme);
     return theme;
 }
@@ -18,7 +18,7 @@ const getUserFromLocalStorage = () => {
 
 const initialState = {
     user: getUserFromLocalStorage(),
-    theme: getThemeFromLocalStorage() || 'dracula'
+    theme: getThemeFromLocalStorage()
 }
 
 const userSlice = createSlice({
